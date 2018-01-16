@@ -4,9 +4,11 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import firebase from 'firebase';
 
-import * as FIREBASE_CONFIG from './firebase_config';
+import * as FIREBASE_CONFIG from '../firebase_config';
 
 import reducers from './reducers';
+
+import LoginForm from './components/LoginForm';
 
 class App extends Component {
   constructor(props) {
@@ -19,9 +21,7 @@ class App extends Component {
     return (
       <Provider store={createStore(reducers)}>
         <View>
-          <Text>
-            Hello World
-          </Text>
+          <LoginForm />
         </View>
       </Provider>
     );
