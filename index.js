@@ -4,7 +4,7 @@ import App from './src/App';
 // get rid of “Remote debugger is in a background tab” warning
 console.ignoredYellowBox = ['Remote debugger'];
 
-AppRegistry.registerComponent('[Your Project Name]', () => App);
+AppRegistry.registerComponent('manager', () => App);
 
 // How to add app icon?
 //
