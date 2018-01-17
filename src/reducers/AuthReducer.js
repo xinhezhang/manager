@@ -26,7 +26,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, user: action.payload, error: '' };
     case LOGIN_USER_FAIL:
       // could add { password: '' } to clear field for secuity purpose
-      return { ...state, error: 'Authentication Failed' };
+      return { ...state, error: 'Authentication Failed', password: '' };
     default:
       return state;
   }
