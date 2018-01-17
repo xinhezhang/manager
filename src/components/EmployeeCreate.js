@@ -58,6 +58,7 @@ class EmployeeCreate extends Component {
 
         <CardSection>
           <Picker
+            style={styles.pickerStyle}
             selectedValue={this.props.shift}
             onValueChange={this.onPickerChange}
           >
@@ -74,6 +75,12 @@ class EmployeeCreate extends Component {
     );
   }
 }
+
+const styles = {
+  pickerStyle: {
+    flex: 1,
+  },
+};
 
 const mapStateToProps = (state) => {
   const { name, phone, shift } = state.employeeForm;
