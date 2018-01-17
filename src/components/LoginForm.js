@@ -17,6 +17,7 @@ class LoginForm extends Component {
             label='Email'
             placeholder='test@gmail.com'
             onChangeText={this.onEmailChange}
+            value={this.props.email}
           />
         </CardSection>
 
@@ -38,4 +39,11 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(null, { emailChanged })(LoginForm);
+// We now have access to "this.props.email"
+const mapStateToProps = (state) => {
+  return {
+    email: state.auth.email,
+  };
+};
+
+export default connect(mapStateToProps, { emailChanged })(LoginForm);
