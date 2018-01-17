@@ -30,7 +30,7 @@ export const employeeCreate = ({ name, phone, shift }) => {
   };
 };
 
-export const employeeFetch = () => {
+export const employeesFetch = () => {
   const { currentUser } = firebase.auth();
 
   // pretend using redux-thunk since this is "Async" action
