@@ -8,6 +8,7 @@ class EmployeeCreate extends Component {
       <Card>
         <CardSection>
           <Input
+            autoCapitalize="words"
             label="Name"
             placeholder="Jane Doe"
           />
