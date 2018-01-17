@@ -51,8 +51,8 @@ const loginUserSuccess = (dispatch, user) => {
     payload: user,
   });
 
-  // goto EmployeeList page
-  Actions.employeeList();
+  // goto main (EmployeeList, EmployeeCreate, ...) page
+  Actions.main();
 };
 
 const loginUserFail = (dispatch) => {
