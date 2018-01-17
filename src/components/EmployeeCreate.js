@@ -59,7 +59,7 @@ class EmployeeCreate extends Component {
         {/* override default style { flexDirection: 'row' } */}
         <CardSection style={{ flexDirection: 'column' }}>
           <Text style={styles.pickerLabelStyle}>
-            Selected Shift
+            Shift
           </Text>
           <Picker
             selectedValue={this.props.shift}
