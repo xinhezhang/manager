@@ -19,6 +19,7 @@ export const employeeCreate = ({ name, phone, shift }) => {
   // pretend using redux-thunk (return a function)
   return () => {
     firebase.database().ref(`/users/${currentUser.uid}/employees`)
-      .push({ name, phone, shift });
+      .push({ name, phone, shift })
+      .then(() => Actions.main({ type: 'reset' }));
   };
 };
