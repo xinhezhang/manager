@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import { emailChanged, passwordChanged, loginUser } from '../actions';
@@ -15,9 +16,22 @@ class LoginForm extends Component {
 
   onButtonPress = () => {
     const { email, password } = this.props;
-
     this.props.loginUser({ email, password });  // MUST be a object
   };
+
+  renderError = () => {
+    if (this.props.error) {
+      const { errorViewStyle, errorTextStyle } = styles;
+
+      return (
+        <View style={errorViewStyle}>
+          <Text style={errorTextStyle}>
+            {this.props.error}
+          </Text>
+        </View>
+      );
+    }
+  }
 
   render() {
     return (
@@ -41,6 +55,8 @@ class LoginForm extends Component {
           />
         </CardSection>
 
+        {this.renderError()}
+
         <CardSection>
           <Button onPress={this.onButtonPress}>
             Login
@@ -51,11 +67,23 @@ class LoginForm extends Component {
   }
 }
 
+const styles = {
+  errorViewStyle: {
+    backgroundColor: 'white',
+  },
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red',
+  },
+};
+
 // We now have access to "this.props.email"
 const mapStateToProps = (state) => {
   return {
     email: state.auth.email,
     password: state.auth.password,
+    error: state.auth.error,
   };
 };
 
