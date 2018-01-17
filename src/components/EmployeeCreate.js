@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Picker } from 'react-native';
+import { Picker, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import { employeeUpdate } from '../actions';
@@ -56,9 +56,12 @@ class EmployeeCreate extends Component {
           />
         </CardSection>
 
-        <CardSection>
+        {/* override default style { flexDirection: 'row' } */}
+        <CardSection style={{ flexDirection: 'column' }}>
+          <Text style={styles.pickerLabelStyle}>
+            Selected Shift
+          </Text>
           <Picker
-            style={styles.pickerStyle}
             selectedValue={this.props.shift}
             onValueChange={this.onPickerChange}
           >
@@ -77,8 +80,10 @@ class EmployeeCreate extends Component {
 }
 
 const styles = {
-  pickerStyle: {
-    flex: 1,
+  pickerLabelStyle: {
+    fontSize: 18,
+    fontWeight: '600',
+    padding: 5,
   },
 };
 
