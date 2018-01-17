@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+// import Communications from 'react-native-communications';
+import { text } from 'react-native-communications';
 
 import {
   employeeUpdate,
@@ -28,6 +30,13 @@ class EmployeeEdit extends Component {
     });
   }
 
+  onSendTextPress = () => {
+    const { name, phone, shift } = this.props;
+    //
+    // Communications.text()
+    text(phone, `Hi, ${name}. Your scheduled shift is on ${shift}. Thank you!`);
+  }
+
   render() {
     return (
       <Card>
@@ -36,6 +45,12 @@ class EmployeeEdit extends Component {
         <CardSection>
           <Button onPress={this.onButtonPress}>
             Save Changes
+          </Button>
+        </CardSection>
+
+        <CardSection>
+          <Button onPress={this.onSendTextPress}>
+            Text Schedule
           </Button>
         </CardSection>
       </Card>
