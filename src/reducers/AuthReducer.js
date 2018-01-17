@@ -25,7 +25,8 @@ export default (state = INITIAL_STATE, action) => {
     case PASSWORD_CHANGED:
       return { ...state, password: action.payload };
     case LOGIN_USER_SUCCESS:
-      return { ...state, user: action.payload, error: '', loading: false };
+      // reset everything
+      return { ...state, ...INITIAL_STATE, user: action.payload };
     case LOGIN_USER_FAIL:
       // could add { password: '' } to clear field for secuity purpose
       return { ...state, error: 'Authentication Failed', password: '', loading: false };
