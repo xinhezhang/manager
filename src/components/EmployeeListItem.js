@@ -19,7 +19,10 @@ class EmployeeListItem extends Component {
 const styles = {
   titleStyle: {
     fontSize: 18,
+    fontWeight: '600',
     paddingLeft: 15,
+    paddingTop: 5,
+    paddingBottom: 5,
   },
 };
 
