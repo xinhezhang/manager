@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { Picker, Text } from 'react-native';
 import { connect } from 'react-redux';
 
-import { employeeUpdate } from '../actions';
+import {
+  employeeUpdate,
+  employeeCreate,
+} from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 class EmployeeCreate extends Component {
@@ -18,15 +21,24 @@ class EmployeeCreate extends Component {
     this.props.employeeUpdate({ key: 'shift', value: day });
   }
 
+  onButtonPress = () => {
+    const { name, phone, shift } = this.props;
+
+    // Another way to preset default shift
+    //this.props.employeeCreate({ name, phone, shift: shift || 'Monday' });
+    this.props.employeeCreate({ name, phone, shift });
+  }
+
   renderPickerItems = () => {
     const weekdays = [
-      'Sunday',
+      'None',
       'Monday',
       'Tuesday',
       'Wednesday',
       'Thursday',
       'Friday',
-      'Saturday'
+      'Saturday',
+      'Sunday',
     ];
 
     return weekdays.map((day) => {
@@ -70,7 +82,7 @@ class EmployeeCreate extends Component {
         </CardSection>
 
         <CardSection>
-          <Button>
+          <Button onPress={this.onButtonPress}>
             Create
           </Button>
         </CardSection>
@@ -95,4 +107,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   employeeUpdate,
+  employeeCreate,
 })(EmployeeCreate);
