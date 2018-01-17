@@ -32,8 +32,7 @@ class EmployeeEdit extends Component {
 
   onSendTextPress = () => {
     const { name, phone, shift } = this.props;
-    //
-    // Communications.text()
+    // Communications.text(phoneNumber, body)
     text(phone, `Hi, ${name}. Your scheduled shift is on ${shift}. Thank you!`);
   }
 
