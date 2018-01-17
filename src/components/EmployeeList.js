@@ -15,10 +15,11 @@ class EmployeeList extends Component {
     this.createDataSource(this.props);
   }
 
-  // "nextProps" are the next set of props that
-  // this component will be rendered with
-  // "this.props" is still the old set of props
   componentWillReceiveProps(nextProps) {
+    // "nextProps" are the next set of props that
+    // this component will be rendered with
+    //
+    // "this.props" is still the old set of props
     this.createDataSource(nextProps);
   }
 
@@ -33,6 +34,7 @@ class EmployeeList extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <View>
         <Text>Employee 1</Text>
@@ -46,7 +48,17 @@ class EmployeeList extends Component {
 }
 
 const mapStateToProps = (state) => {
+  // "state.employees" is a object has many key-value pairs, for each
+  // key-value pair, run the "fat arrow function" with (value, key),
+  // return a object like
+  // { name: 'Jim', phone: '111-111-1111', shift: 'Monday', id: 'xxx' }
+  //
+  // Finally, lodash's map function will put these objects into a array
+  const employees = _.map(state.employees, (val, uid) => {
+    return { ...val, uid };
+  });
 
+  return { employees };
 };
 
 export default connect(mapStateToProps, { employeesFetch })(EmployeeList);
