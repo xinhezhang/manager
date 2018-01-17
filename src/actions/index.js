@@ -12,6 +12,7 @@ export const emailChanged = (text) => {
   };
 };
 
+// action creator returns a object
 export const passwordChanged = (text) => {
   return {
     type: PASSWORD_CHANGED,
@@ -19,6 +20,9 @@ export const passwordChanged = (text) => {
   };
 };
 
+// action creator returns a function (by using redux-thunk)
+// used for "Async" actions
+// dispatch: a function, it allows manually send action to all the reducers
 export const loginUser = ({ email, password }) => {
   return (dispatch) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
