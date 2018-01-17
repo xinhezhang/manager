@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import {
   employeeUpdate,
+  employeeSave,
 } from '../actions';
 
 import { Card, CardSection, Button } from './common';
@@ -18,7 +19,13 @@ class EmployeeEdit extends Component {
 
   onButtonPress = () => {
     const { name, phone, shift } = this.props;
-    console.log(name, phone, shift);
+    //console.log(name, phone, shift);
+    this.props.employeeSave({
+      name,
+      phone,
+      shift,
+      uid: this.props.employee.uid // from "EmployeeListItem.js", "onRowPress()"
+    });
   }
 
   render() {
@@ -44,4 +51,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   employeeUpdate,
+  employeeSave,
 })(EmployeeEdit);
