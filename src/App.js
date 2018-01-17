@@ -8,7 +8,7 @@ import * as FIREBASE_CONFIG from '../firebase_config';
 
 import reducers from './reducers';
 
-import LoginForm from './components/LoginForm';
+import Router from './Router';
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <LoginForm />
+        <Router />
       </Provider>
     );
   }
