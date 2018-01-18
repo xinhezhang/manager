@@ -6,6 +6,7 @@ import {
   EMPLOYEE_CREATE,
   EMPLOYEES_FETCH_SUCCESS,
   EMPLOYEE_SAVE_SUCCESS,
+  EMPLOYEE_DELETE_SUCCESS,
 } from './types';
 
 export const employeeUpdate = ({ key, value }) => {
@@ -64,10 +65,13 @@ export const employeeSave = ({ name, phone, shift, uid }) => {
 export const employeeDelete = ({ uid }) => {
   const { currentUser } = firebase.auth();
 
-  return () => {
+  return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
       .remove()
       .then(() => {
+        dispatch({
+          type: EMPLOYEE_DELETE_SUCCESS,
+        });
         Actions.main({ type: 'reset' });
       });
   };
