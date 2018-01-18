@@ -4,11 +4,12 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
+  LOGOUT_USER,
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  email: '',
-  password: '',
+  email: 'test@gmail.com',  // TODO
+  password: 'password',     // TODO
   user: null,
   error: '',
   loading: false,
@@ -32,6 +33,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, error: 'Authentication Failed', password: '', loading: false };
     case LOGIN_USER:
       return { ...state, loading: true, error: '' };
+    case LOGOUT_USER:
+      return INITIAL_STATE;
     default:
       return state;
   }
