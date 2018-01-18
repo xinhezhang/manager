@@ -4,6 +4,9 @@ import { Actions } from 'react-native-router-flux';
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
+  SIGNUP_USER_SUCCESS,
+  SIGNUP_USER_FAIL,
+  SIGNUP_USER,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
@@ -25,6 +28,36 @@ export const passwordChanged = (text) => {
   };
 };
 
+export const signupUser = ({ email, password }) => {
+  return (dispatch) => {
+    dispatch({
+      type: SIGNUP_USER,
+    });
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((user) => signupUserSuccess(dispatch, user))
+      .catch((error) => {
+        console.log(error);
+        signupUserFail(dispatch);
+      });
+  };
+};
+
+const signupUserSuccess = (dispatch, user) => {
+  dispatch({
+    type: SIGNUP_USER_SUCCESS,
+    payload: user,
+  });
+
+  //Actions.auth({ type: 'reset' });
+};
+
+const signupUserFail = (dispatch) => {
+  dispatch({
+    type: SIGNUP_USER_FAIL,
+  });
+};
+
 // action creator returns a function (by using redux-thunk)
 // used for "Async" actions
 // dispatch: a function, it allows manually send action to all the reducers
@@ -38,10 +71,7 @@ export const loginUser = ({ email, password }) => {
       .then((user) => loginUserSuccess(dispatch, user))
       .catch((error) => {
         console.log(error);
-
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then((user) => loginUserSuccess(dispatch, user))
-          .catch(() => loginUserFail(dispatch));
+        loginUserFail(dispatch);
       });
   };
 };

@@ -1,6 +1,9 @@
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
+  SIGNUP_USER_SUCCESS,
+  SIGNUP_USER_FAIL,
+  SIGNUP_USER,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
@@ -8,11 +11,13 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  email: 'test@gmail.com',  // TODO
-  password: 'password',     // TODO
+  email: '',  // TODO
+  password: '',     // TODO
   user: null,
   error: '',
-  loading: false,
+  message: '',  // signup success message
+  signupLoading: false,
+  loginLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -25,14 +30,21 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, email: action.payload };
     case PASSWORD_CHANGED:
       return { ...state, password: action.payload };
+    case SIGNUP_USER_SUCCESS:
+      // reset everything
+      return { ...state, ...INITIAL_STATE, message: 'Account Creation Success', email: action.payload.email };
+    case SIGNUP_USER_FAIL:
+      return { ...state, error: 'Account Creation Failed', email: '', password: '', signupLoading: false };
+    case SIGNUP_USER:
+      return { ...state, signupLoading: true, error: '' };
     case LOGIN_USER_SUCCESS:
       // reset everything
       return { ...state, ...INITIAL_STATE, user: action.payload };
     case LOGIN_USER_FAIL:
       // could add { password: '' } to clear field for secuity purpose
-      return { ...state, error: 'Authentication Failed', password: '', loading: false };
+      return { ...state, error: 'Authentication Failed', password: '', loginLoading: false };
     case LOGIN_USER:
-      return { ...state, loading: true, error: '' };
+      return { ...state, loginLoading: true, error: '' };
     case LOGOUT_USER:
       return INITIAL_STATE;
     default:

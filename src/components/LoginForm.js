@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import {
+  emailChanged,
+  passwordChanged,
+  signupUser,
+  loginUser,
+} from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 
 class LoginForm extends Component {
@@ -14,31 +19,56 @@ class LoginForm extends Component {
     this.props.passwordChanged(text);
   }
 
-  onButtonPress = () => {
+  onSignupButtonPress = () => {
+    const { email, password } = this.props;
+    this.props.signupUser({ email, password });  // MUST be a object
+  }
+
+  onLoginButtonPress = () => {
     const { email, password } = this.props;
     this.props.loginUser({ email, password });  // MUST be a object
   }
 
-  renderButton = () => {
-    if (this.props.loading) {
+  renderSignupButton = () => {
+    if (this.props.signupLoading) {
       return <Spinner size="large" />;
     }
 
     return (
-      <Button onPress={this.onButtonPress}>
+      <Button onPress={this.onSignupButtonPress}>
+        Signup
+      </Button>
+    );
+  }
+
+  renderLoginButton = () => {
+    if (this.props.loginLoading) {
+      return <Spinner size="large" />;
+    }
+
+    return (
+      <Button onPress={this.onLoginButtonPress}>
         Login
       </Button>
     );
   }
 
-  renderError = () => {
-    if (this.props.error) {
-      const { errorViewStyle, errorTextStyle } = styles;
+  renderMessage = () => {
+    const { viewStyle, errorTextStyle, messageTextStyle } = styles;
 
+    if (this.props.error) {
       return (
-        <View style={errorViewStyle}>
+        <View style={viewStyle}>
           <Text style={errorTextStyle}>
             {this.props.error}
+          </Text>
+        </View>
+      );
+    } else if (this.props.message) {
+      return (
+        <View style={viewStyle}>
+          <Text style={messageTextStyle}>
+            {this.props.message}
           </Text>
         </View>
       );
@@ -67,10 +97,11 @@ class LoginForm extends Component {
           />
         </CardSection>
 
-        {this.renderError()}
+        {this.renderMessage()}
 
         <CardSection>
-          {this.renderButton()}
+          {this.renderSignupButton()}
+          {this.renderLoginButton()}
         </CardSection>
       </Card>
     );
@@ -78,7 +109,7 @@ class LoginForm extends Component {
 }
 
 const styles = {
-  errorViewStyle: {
+  viewStyle: {
     backgroundColor: 'white',
   },
   errorTextStyle: {
@@ -86,17 +117,23 @@ const styles = {
     alignSelf: 'center',
     color: 'red',
   },
+  messageTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'green',
+  },
 };
 
 // We now have access to "this.props.email"
 const mapStateToProps = ({ auth }) => {
-  const { email, password, error, loading } = auth;
-  
-  return { email, password, error, loading };
+  const { email, password, error, message, loginLoading, signupLoading } = auth;
+
+  return { email, password, error, message, loginLoading, signupLoading };
 };
 
 export default connect(mapStateToProps, {
   emailChanged,
   passwordChanged,
+  signupUser,
   loginUser,
 })(LoginForm);
