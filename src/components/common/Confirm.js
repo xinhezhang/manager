@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, View, Modal } from 'react-native';
 
 // can NOT import from "index.js" again
-import { CardSection } from './CardSection';
-import { Button } from './Button';
+import CardSection from './CardSection';
+import Button from './Button';
 
 const Confirm = ({ children, visible, onAccept, onDecline }) => {
   const { containerStyle, cardSectionStyle, textStyle } = styles;
