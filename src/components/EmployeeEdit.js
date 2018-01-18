@@ -9,10 +9,14 @@ import {
   employeeSave,
 } from '../actions';
 
-import { Card, CardSection, Button } from './common';
+import { Card, CardSection, Button, Confirm } from './common';
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeEdit extends Component {
+  state = {
+    modalVisible: false,
+  };
+
   componentWillMount() {
     _.each(this.props.employee, (value, key) => {
       this.props.employeeUpdate({ key, value });
@@ -36,6 +40,12 @@ class EmployeeEdit extends Component {
     text(phone, `Hi, ${name}. Your scheduled shift is on ${shift}. Thank you!`);
   }
 
+  onDeletePress = () => {
+    this.setState({
+      modalVisible: !this.state.modalVisible,
+    });
+  }
+
   render() {
     return (
       <Card>
@@ -52,6 +62,18 @@ class EmployeeEdit extends Component {
             Text Schedule
           </Button>
         </CardSection>
+
+        <CardSection>
+          <Button onPress={this.onDeletePress}>
+            Fire Employee
+          </Button>
+        </CardSection>
+
+        <Confirm
+          visible={this.state.modalVisible}
+        >
+          Are you sure you want to delete this?
+        </Confirm>
       </Card>
     );
   }
