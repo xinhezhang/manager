@@ -7,6 +7,7 @@ import { text } from 'react-native-communications';
 import {
   employeeUpdate,
   employeeSave,
+  employeeDelete,
 } from '../actions';
 
 import { Card, CardSection, Button, Confirm } from './common';
@@ -46,6 +47,18 @@ class EmployeeEdit extends Component {
     });
   }
 
+  onAccept = () => {
+    this.props.employeeDelete({
+      uid: this.props.employee.uid,
+    });
+  }
+
+  onDecline = () => {
+    this.setState({
+      modalVisible: false,
+    });
+  }
+
   render() {
     return (
       <Card>
@@ -71,6 +84,8 @@ class EmployeeEdit extends Component {
 
         <Confirm
           visible={this.state.modalVisible}
+          onAccept={this.onAccept}
+          onDecline={this.onDecline}
         >
           Are you sure you want to delete this?
         </Confirm>
@@ -88,4 +103,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   employeeUpdate,
   employeeSave,
+  employeeDelete,
 })(EmployeeEdit);
