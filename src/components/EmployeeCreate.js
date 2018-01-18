@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  employeeUpdate,
   employeeCreate,
 } from '../actions';
 
@@ -42,6 +41,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  employeeUpdate,
   employeeCreate,
 })(EmployeeCreate);

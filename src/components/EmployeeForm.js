@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import {
   employeeUpdate,
-  employeeCreate,
 } from '../actions';
 import { CardSection, Input } from './common';
 
@@ -93,5 +92,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   employeeUpdate,
-  employeeCreate,
 })(EmployeeForm);
