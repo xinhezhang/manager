@@ -27,6 +27,8 @@ const RouterComponent = () => {
             title="Employee List"
             rightTitle="Add"
             onRight={() => Actions.employeeCreate()}
+            leftTitle="Logout"
+            onLeft={() => Actions.auth({ type: 'reset' })}
           />
 
           <Scene

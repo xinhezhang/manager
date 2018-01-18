@@ -8,7 +8,6 @@ import {
   logoutUser,
 } from '../actions';
 
-import { CardSection, Button } from './common';
 import EmployeeListItem from './EmployeeListItem';
 
 class EmployeeList extends Component {
@@ -52,12 +51,6 @@ class EmployeeList extends Component {
           dataSource={this.dataSource}
           renderRow={this.renderRow}
         />
-
-        <CardSection>
-          <Button onPress={this.props.logoutUser}>
-            Logout
-          </Button>
-        </CardSection>
       </View>
     );
   }
