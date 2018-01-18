@@ -3,12 +3,17 @@ import { connect } from 'react-redux';
 
 import {
   employeeCreate,
+  employeeClear,
 } from '../actions';
 
 import { Card, CardSection, Button } from './common';
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeCreate extends Component {
+  componentWillMount() {
+    this.props.employeeClear();
+  }
+
   onButtonPress = () => {
     const { name, phone, shift } = this.props;
 
@@ -42,4 +47,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   employeeCreate,
+  employeeClear,
 })(EmployeeCreate);
